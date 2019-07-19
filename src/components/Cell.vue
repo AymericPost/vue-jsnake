@@ -33,7 +33,6 @@ export default {
                     width: "100%",
                     "font-size": "8px",
                     "text-align": "center",
-                    // "justify-content": "center",
                     "background-color": "white"
                 }
 
