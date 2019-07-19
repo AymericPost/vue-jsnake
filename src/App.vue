@@ -13,7 +13,6 @@ import store from "./store"
 
 export default {
   mounted: () => {
-    store.dispatch("startGame")
     window.addEventListener("keydown", (event) => {
       store.dispatch("handleUserInput", event);
     });
@@ -23,21 +22,8 @@ export default {
 
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  @font-face {
+    font-family: "Press Start 2P";
+    src: url("./assets/PressStart2P-Regular.ttf");
   }
-}
 </style>
