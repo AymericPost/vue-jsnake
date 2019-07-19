@@ -1,13 +1,15 @@
 <template>
     <section>
         <div :style="gridSetup">
-            <cell v-for="value in (((parseInt(xMax))*parseInt(yMax)) + 1)" :coords="coordsCalculator(value)" :key="value" />
+            <cell v-for="value in (((parseInt(xMax))*parseInt(yMax)))" :coords="coordsCalculator(value)" :key="value" />
         </div>
     </section>
 </template>
 
 <script>
-import cell from "./Cell.vue"
+import cell from "./Cell.vue";
+import {mapState} from "vuex";
+import router from "../router"
 
 export default {
     name: "grid",
@@ -26,6 +28,7 @@ export default {
         }
     },
     computed: {
+        ...mapState(["inGame"]),
         gridSetup() {
             let columns = "";
             let rows = "";
@@ -43,6 +46,9 @@ export default {
                 "grid-gap": "2px"
             }
         }
+    },
+    beforeMount() {
+        if(!this.inGame) router.push("/")
     }
 }
 </script>
