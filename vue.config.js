@@ -1,3 +1,3 @@
-module.exports = {
-    publicPath: "<vue-jsnake>"
-  }
+// module.exports = {
+//     publicPath: "/vue-jsnake/"
+//   }

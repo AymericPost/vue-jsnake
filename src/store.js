@@ -112,12 +112,31 @@ export default new Vuex.Store({
         19: "togglePause"
       }
     },
+    gameInit() {
+      this.state.inGame = true;
+      this.state.lost = false;
+      this.state.gameTick = 0;
+
+      for(let i = 1 ; i < (((this.state.xMax) * this.state.yMax) + 1) ; i++) {
+          const x = i % this.state.xMax
+          const y = this.state.yMax - Math.floor(i / this.state.yMax)
+          this.state.grid[(x == 0 ? this.state.xMax : x) + "-" +  (x == 0 ? y + 1 : y)] = {occupied: false, food: null};
+      }
+
+      const midPoint = [Math.floor(this.state.xMax / 2), Math.floor(this.state.yMax / 2)]
+      this.state.snake.coords = [(midPoint[0] - 1) + "-" + midPoint[1], midPoint[0] + "-" + midPoint[1], (midPoint[0] + 1) + "-" + midPoint[1]]
+      this.state.snake.direction = (midPoint[0] + 2) + "-" + midPoint[1];
+    },
     nextGameTick() {
       this.state.gameTick++;
       this.state.snake.ateFood = false;
 
       try {
-        if(this.state.grid[this.state.snake.direction].occupied) this.state.lost = true;
+        if(this.state.grid[this.state.snake.direction].occupied) {
+          console.error("snakePointerException: \"why do you hit yourself?\"")
+          console.log("You lost!")
+          this.state.lost = true;
+        }
         else {
           const previous = this.state.snake.coords[this.state.snake.coords.length - 1].split("-").map(elem => {
             return parseInt(elem);
@@ -139,7 +158,8 @@ export default new Vuex.Store({
   
         }
       } catch(err) {
-          console.log(err);
+          console.error("snakeOutOfBoundException: \"you cannot eat the cosmic event horizon\"");
+          console.log("You lost!")
           this.state.lost = true;
       }
       
@@ -170,7 +190,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    handleUserInput(commit, event) {
+    handleUserInput(state, event) {
       const assignedKeys = Object.keys(this.state.keyMapping);
       
       try {
@@ -188,22 +208,9 @@ export default new Vuex.Store({
     },
     startGame() {
       if(!this.state.inGame){
-        this.state.inGame = true;
-        this.state.lost = false;
-
-        for(let i = 1 ; i < (((this.state.xMax) * this.state.yMax) + 1) ; i++) {
-            const x = i % this.state.xMax
-            const y = this.state.yMax - Math.floor(i / this.state.yMax)
-            this.state.grid[(x == 0 ? this.state.xMax : x) + "-" +  (x == 0 ? y + 1 : y)] = {occupied: false, food: null};
-        }
-
-        const midPoint = [Math.floor(this.state.xMax / 2), Math.floor(this.state.yMax / 2)]
-        this.state.snake.coords = [(midPoint[0] - 1) + "-" + midPoint[1], midPoint[0] + "-" + midPoint[1], (midPoint[0] + 1) + "-" + midPoint[1]]
-        this.state.snake.direction = (midPoint[0] + 2) + "-" + midPoint[1];
-
+        this.commit("gameInit")
         this.commit("occupiedCheck");
         this.commit("generateFood");
-
         let intervalId = setInterval(() => {
           if(this.state.lost) {
             this.state.inGame = false;

@@ -1,7 +1,7 @@
 <template>
     <section>
         <div :style="gridSetup">
-            <cell v-for="value in (((parseInt(xMax))*parseInt(yMax)) + 1)" :coords="coordsCalculator(value)" :key="value" />
+            <cell v-for="value in (((parseInt(xMax))*parseInt(yMax)))" :coords="coordsCalculator(value)" :key="value" />
         </div>
     </section>
 </template>
