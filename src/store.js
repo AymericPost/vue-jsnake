@@ -9,17 +9,20 @@ export default new Vuex.Store({
     inGame: false,
     paused: false,
     lost: false,
+    gameOverType: 0,
+    clockId: "",
+    keyboard: "QWERTY",
     keyMapping: {
+      27: "toMenu",
       38: "directionUp",
-      90: "directionUp",
+      87: "directionUp",
       39: "directionRight",
       68: "directionRight",
       40: "directionDown",
       83: "directionDown",
       37: "directionLeft",
-      81: "directionLeft",
+      65: "directionLeft",
       32: "togglePause",
-      27: "togglePause",
       80: "togglePause",
       19: "togglePause"
     },
@@ -81,7 +84,9 @@ export default new Vuex.Store({
       this.state.paused = !this.state.paused;
     },
     setKeyboardAZERTY() {
+      this.state.keyboard = "AZERTY";
       this.state.keyMapping = {
+        27: "toMenu",
         38: "directionUp",
         90: "directionUp",
         39: "directionRight",
@@ -91,13 +96,14 @@ export default new Vuex.Store({
         37: "directionLeft",
         81: "directionLeft",
         32: "togglePause",
-        27: "togglePause",
         80: "togglePause",
         19: "togglePause"
       }
     },
     setKeyboardQWERTY() {
+      this.state.keyboard = "QWERTY";
       this.state.keyMapping = {
+        27: "toMenu",
         38: "directionUp",
         87: "directionUp",
         39: "directionRight",
@@ -107,15 +113,21 @@ export default new Vuex.Store({
         37: "directionLeft",
         65: "directionLeft",
         32: "togglePause",
-        27: "togglePause",
         80: "togglePause",
         19: "togglePause"
       }
+    },
+    setMsPerGameTick(state, ms) {
+      this.state.msPerGameTick = ms;
+    },
+    setClockId(state, id) {
+      this.state.clockId = id;
     },
     gameInit() {
       this.state.inGame = true;
       this.state.lost = false;
       this.state.gameTick = 0;
+      this.state.gameOverType = 0;
 
       for(let i = 1 ; i < (((this.state.xMax) * this.state.yMax) + 1) ; i++) {
           const x = i % this.state.xMax
@@ -136,6 +148,7 @@ export default new Vuex.Store({
           console.error("snakePointerException: \"why do you hit yourself?\"")
           console.log("You lost!")
           this.state.lost = true;
+          this.state.gameOverType = 1;
         }
         else {
           const previous = this.state.snake.coords[this.state.snake.coords.length - 1].split("-").map(elem => {
@@ -161,6 +174,7 @@ export default new Vuex.Store({
           console.error("snakeOutOfBoundException: \"you cannot eat the cosmic event horizon\"");
           console.log("You lost!")
           this.state.lost = true;
+          this.state.gameOverType = 2;
       }
       
     },
@@ -187,26 +201,47 @@ export default new Vuex.Store({
       }
 
       this.state.grid[dropPoint].food = "F";
+    },
+    forfeit() {
+      this.state.inGame = false;
+      this.state.paused = false;
+      this.state.lost = false;
+      this.state.grid = {};
+      this.state.snake = {
+        coords: [],
+        direction: "",
+        ateFood: false
+      };
+      this.state.gameTick = 0;
     }
   },
   actions: {
     handleUserInput(state, event) {
       const assignedKeys = Object.keys(this.state.keyMapping);
-      
-      try {
-        if(this.state.paused) {
-          this.commit("togglePause");
-
-          if(![32, 27, 80, 19].includes(event.keyCode) && assignedKeys.includes(String(event.keyCode)))
+      if(event.keyCode == 27) router.push("/");
+      else {
+        try {
+          if(this.state.paused) {
+            this.commit("togglePause");
+  
+            if(![32, 80, 19].includes(event.keyCode) && assignedKeys.includes(String(event.keyCode)))
+              this.commit(this.state.keyMapping[event.keyCode]);
+          }
+          else if(assignedKeys.includes(String(event.keyCode)))
             this.commit(this.state.keyMapping[event.keyCode]);
+        } catch(err) {
+          console.log(err.message)
         }
-        else if(assignedKeys.includes(String(event.keyCode)))
-          this.commit(this.state.keyMapping[event.keyCode]);
-      } catch(err) {
-        console.log(err.message)
       }
+     
     },
-    startGame() {
+    setTickLength(state, ms) {
+      state.commit("setMsPerGameTick", ms);
+    },
+    setKeyboard(state, type) {
+      if(["AZERTY", "QWERTY"].includes(type)) this.commit("setKeyboard" + type);
+    },
+    startGame(state) {
       if(!this.state.inGame){
         this.commit("gameInit")
         this.commit("occupiedCheck");
@@ -215,6 +250,11 @@ export default new Vuex.Store({
           if(this.state.lost) {
             this.state.inGame = false;
             this.state.paused = false;
+
+            setTimeout(() => {
+              router.push("/")
+            }, 500)
+
             clearInterval(intervalId);
           } else if(this.state.inGame && !this.state.paused && !this.state.lost) {
             this.commit("nextGameTick");
@@ -222,8 +262,13 @@ export default new Vuex.Store({
             if(this.state.snake.ateFood) this.commit("generateFood");
           };
         }, this.state.msPerGameTick);
+        this.commit("setClockId", intervalId);
         router.push("/game")
-    }
+    } else router.push("/game")
+    },
+    forfeitGame() {
+      this.commit("forfeit");
+      clearInterval(this.state.clockId);
     }
   }
 })
