@@ -26,4 +26,8 @@ export default {
     font-family: "Press Start 2P";
     src: url("./assets/PressStart2P-Regular.ttf");
   }
+  html {
+    min-width: 100vw;
+    min-height: 100vh;
+  }
 </style>
