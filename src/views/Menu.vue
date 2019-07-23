@@ -12,22 +12,41 @@
           
           <label>
             <input type="radio" class="nes-radio" name="difficulty" v-model="difficultyLevel" value="0" />
-            <span>Vue.JSnorefest</span>
+            <span>Beginner</span>
           </label>
 
           <label>
             <input type="radio" class="nes-radio" name="difficulty" v-model="difficultyLevel" value="1" />
-            <span>Vue.JSnail</span>
+            <span>Easy</span>
           </label>
 
           <label>
             <input type="radio" class="nes-radio" name="difficulty" v-model="difficultyLevel" value="2" />
-            <span>Vue.JSnake</span>
+            <span>Medium</span>
           </label>
 
           <label>
             <input type="radio" class="nes-radio" name="difficulty" v-model="difficultyLevel" value="3" />
-            <span>Vue.JinSane</span>
+            <span>Hard</span>
+          </label>
+        </div>
+
+        <div v-if="!this.inGame" id="game-size">
+          <h3>Game size</h3>
+
+          <label>
+            <input type="radio" class="nes-radio" name="size" v-model="size" value="8" />
+            <span>Small</span>
+          </label>
+
+          <label>
+            <input type="radio" class="nes-radio" name="size" v-model="size" value="12" />
+            <span>Medium</span>
+          </label>
+
+          <label>
+            <input type="radio" class="nes-radio" name="size" v-model="size" value="16" />
+            <span>Large</span>
           </label>
         </div>
 
@@ -93,7 +112,8 @@ export default {
   },
   data() {
     return {
-      difficultyLevel: "2"
+      difficultyLevel: "2",
+      size: "12"
     }
   },
   computed: {
@@ -110,7 +130,7 @@ export default {
           return 350;
           break;
         case "3":
-          return 100;
+          return 150;
           break;
         default:
           return 404;
@@ -119,14 +139,18 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["startGame", "handleUserInput", "setTickLength", "setKeyboard", "forfeitGame"]),
+    ...mapActions(["startGame", "handleUserInput", "setTickLength", "setKeyboard", "forfeitGame", "setBoard", "setInMenu"]),
     startButton() {
-      if(!this.inGame) this.setTickLength(this.tickLength);
+      if(!this.inGame) {
+        this.setTickLength(this.tickLength);
+        this.setBoard([parseInt(this.size), parseInt(this.size)]);
+      }
       this.startGame();
     }
   },
   mounted() {
     if(this.inGame && !this.paused) this.handleUserInput({keyCode: 32});
+    this.setInMenu(true);
   }
 }
 </script>
@@ -152,7 +176,6 @@ export default {
 
       #difficulty {
         display: grid;
-        justify-content: center;
         grid-gap: 1%;
         column-gap: 5%;
         grid-template-columns: auto auto auto auto;
@@ -162,22 +185,29 @@ export default {
           grid-column: 1 / span 4;
           grid-row: 1
         }
+      }
 
-        label {
-          padding-right: 1%;
+      #game-size {
+        display: grid;
+        grid-gap: 1%;
+        column-gap: 10%;
+        grid-template-columns: auto auto auto;
+        grid-template-rows: auto auto;
+
+        h3 {
+          grid-column: 1 / span 3;
+          grid-row: 1
         }
       }
 
       #controls {
         display: grid;
-        justify-content: center;
         grid-gap: 1%;
         column-gap: 2%;
         grid-template-columns: auto auto;
         grid-template-rows: auto auto auto;
 
         h3 {
-          padding-left: 1%;
           grid-column: 1 / span 2;
           grid-row: 1;
         }

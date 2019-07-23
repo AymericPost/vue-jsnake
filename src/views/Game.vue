@@ -7,6 +7,7 @@
 <script>
 import grid from "../components/Grid";
 import {mapState} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
     name: "game",
@@ -15,6 +16,12 @@ export default {
     },
     computed: {
         ...mapState(["xMax", "yMax", "gameTick"])
+    },
+    methods: {
+        ...mapActions(["setInMenu"])
+    },
+    mounted() {
+        this.setInMenu(false);
     }
 }
 </script>
