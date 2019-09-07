@@ -9,7 +9,8 @@
 <script>
 import cell from "./Cell.vue";
 import {mapState} from "vuex";
-import router from "../router"
+import router from "../router";
+import {coordsForIndex} from "../utils";
 
 export default {
     name: "grid",
@@ -22,9 +23,10 @@ export default {
     },
     methods: {
         coordsCalculator(value) {
-            const x = value % parseInt(this.xMax)
-            const y = parseInt(this.yMax) - Math.floor(value / parseInt(this.yMax))
-            return (x == 0 ? parseInt(this.xMax) : x) + "-" +  (x == 0 ? y + 1 : y);
+            return coordsForIndex(value -1, this.xMax, this.yMax);
+            // const x = value % parseInt(this.xMax)
+            // const y = parseInt(this.yMax) - Math.floor(value / parseInt(this.yMax))
+            // return (x == 0 ? parseInt(this.xMax) : x) + "-" +  (x == 0 ? y + 1 : y);
         }
     },
     computed: {
