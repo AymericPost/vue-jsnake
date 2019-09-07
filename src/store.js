@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import router from "./router"
+
+import router from "./router";
+import {coordsForIndex} from "./utils";
 
 Vue.use(Vuex)
 
@@ -138,10 +140,8 @@ export default new Vuex.Store({
       this.state.gameTick = 0;
       this.state.gameOverType = 0;
 
-      for(let i = 1 ; i < (((this.state.xMax) * this.state.yMax) + 1) ; i++) {
-          const x = i % this.state.xMax
-          const y = this.state.yMax - Math.floor(i / this.state.yMax)
-          this.state.grid[(x == 0 ? this.state.xMax : x) + "-" +  (x == 0 ? y + 1 : y)] = {occupied: false, food: null};
+      for(let i = 0 ; i < (((this.state.xMax) * this.state.yMax)) ; i++) {
+          this.state.grid[coordsForIndex(i, this.state.xMax, this.state.yMax)] = {occupied: false, food: null};
       }
 
       const midPoint = [Math.floor(this.state.xMax / 2), Math.floor(this.state.yMax / 2)]
@@ -267,6 +267,14 @@ export default new Vuex.Store({
           if(this.state.lost) {
             this.state.inGame = false;
             this.state.paused = false;
+            this.state.lost = false;
+            this.state.grid = {};
+            this.state.snake = {
+              coords: [],
+              direction: "",
+              ateFood: false
+            };
+            this.state.gameTick = 0;
 
             setTimeout(() => {
               router.push("/")
