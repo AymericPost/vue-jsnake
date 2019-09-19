@@ -33,6 +33,7 @@ export default new Vuex.Store({
     gameTick: 0,
     msPerGameTick: 1000,
     grid: {},
+    score: 0,
     snake: {
       coords: [],
       direction: "",
@@ -133,6 +134,7 @@ export default new Vuex.Store({
         this.state.inMenu = bool;
     },
     gameInit() {
+      this.state.score = 0;
       this.state.inGame = true;
       this.state.lost = false;
       this.state.gameTick = 0;
@@ -167,6 +169,7 @@ export default new Vuex.Store({
 
           if(this.state.grid[next.join("-")] && this.state.grid[next.join("-")].food) {
             this.state.snake.ateFood = true;
+            this.state.score += 10;
             this.state.grid[next.join("-")].food = null;
           }
 
@@ -266,15 +269,9 @@ export default new Vuex.Store({
             this.state.paused = false;
             this.state.lost = false;
             this.state.grid = {};
-            this.state.snake = {
-              coords: [],
-              direction: "",
-              ateFood: false
-            };
-            this.state.gameTick = 0;
 
             setTimeout(() => {
-              router.push("/")
+              router.push("/game-over")
             }, 500)
 
             clearInterval(intervalId);
