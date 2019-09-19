@@ -30,7 +30,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(["inGame"]),
+        ...mapState(["inGame", "lost"]),
         gridSetup() {
             let columns = "";
             let rows = "";
@@ -50,7 +50,7 @@ export default {
         }
     },
     beforeMount() {
-        if(!this.inGame) router.push("/")
+        if(!this.inGame || this.lost) router.push("/game-over")
     }
 }
 </script>
