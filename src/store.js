@@ -269,15 +269,9 @@ export default new Vuex.Store({
             this.state.paused = false;
             this.state.lost = false;
             this.state.grid = {};
-            this.state.snake = {
-              coords: [],
-              direction: "",
-              ateFood: false
-            };
-            this.state.gameTick = 0;
 
             setTimeout(() => {
-              router.push("/")
+              router.push("/game-over")
             }, 500)
 
             clearInterval(intervalId);

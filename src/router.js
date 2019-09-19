@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Menu from './views/Menu.vue';
 import Game from "./views/Game.vue";
+import GameOver from "./views/GameOver.vue";
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: "/game",
       name: "Game",
       component: Game
+    },
+    {
+      path:"/game-over",
+      name: "GameOver",
+      component: GameOver
     }
     // {
     //   path: '/about',
