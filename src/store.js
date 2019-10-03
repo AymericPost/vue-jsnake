@@ -35,6 +35,13 @@ export default new Vuex.Store({
     grid: {},
     score: 0,
     snake: {
+      style: {
+        type: 1,
+        outline: "black",
+        body: "green",
+        feature: "orange",
+        eyes: "yellow"
+      },
       coords: [],
       direction: "",
       ateFood: false
@@ -210,18 +217,13 @@ export default new Vuex.Store({
         dropPoint = (Math.floor(Math.random() * this.state.xMax) + 1) + "-" + (Math.floor(Math.random() * this.state.yMax) + 1 ) 
       }
 
-      this.state.grid[dropPoint].food = "F";
+      this.state.grid[dropPoint].food = "N";
     },
     forfeit() {
       this.state.inGame = false;
       this.state.paused = false;
       this.state.lost = false;
       this.state.grid = {};
-      this.state.snake = {
-        coords: [],
-        direction: "",
-        ateFood: false
-      };
       this.state.gameTick = 0;
     }
   },
