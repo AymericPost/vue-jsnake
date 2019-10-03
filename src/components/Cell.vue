@@ -31,22 +31,22 @@ import {mapGetters} from "vuex";
 import {mapState} from "vuex";
 
 import mouse from "./sprites/mouse"
-import EHead1 from "./sprites/1-stripped/EHead";
-import WHead1 from "./sprites/1-stripped/WHead";
-import NHead1 from "./sprites/1-stripped/NHead";
-import SHead1 from "./sprites/1-stripped/SHead";
-import EWSegment1 from "./sprites/1-stripped/EWSegment";
-import WESegment1 from "./sprites/1-stripped/WESegment";
-import NSSegment1 from "./sprites/1-stripped/NSSegment";
-import SNSegment1 from "./sprites/1-stripped/SNSegment";
-import WNTurn1 from "./sprites/1-stripped/WNTurn";
-import ENTurn1 from "./sprites/1-stripped/ENTurn";
-import WSTurn1 from "./sprites/1-stripped/WSTurn";
-import ESTurn1 from "./sprites/1-stripped/ESTurn";
-import ETail1 from "./sprites/1-stripped/ETail";
-import NTail1 from "./sprites/1-stripped/NTail";
-import WTail1 from "./sprites/1-stripped/WTail";
-import STail1 from "./sprites/1-stripped/STail";
+import EHead1 from "./sprites/1-striped/EHead";
+import WHead1 from "./sprites/1-striped/WHead";
+import NHead1 from "./sprites/1-striped/NHead";
+import SHead1 from "./sprites/1-striped/SHead";
+import EWSegment1 from "./sprites/1-striped/EWSegment";
+import WESegment1 from "./sprites/1-striped/WESegment";
+import NSSegment1 from "./sprites/1-striped/NSSegment";
+import SNSegment1 from "./sprites/1-striped/SNSegment";
+import WNTurn1 from "./sprites/1-striped/WNTurn";
+import ENTurn1 from "./sprites/1-striped/ENTurn";
+import WSTurn1 from "./sprites/1-striped/WSTurn";
+import ESTurn1 from "./sprites/1-striped/ESTurn";
+import ETail1 from "./sprites/1-striped/ETail";
+import NTail1 from "./sprites/1-striped/NTail";
+import WTail1 from "./sprites/1-striped/WTail";
+import STail1 from "./sprites/1-striped/STail";
 
 export default {
     name: "cell",
@@ -132,5 +132,6 @@ export default {
     section {
         height: 36px;
         width: 36;
+        background-color: white;
     }
 </style>
