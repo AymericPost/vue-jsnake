@@ -1,7 +1,11 @@
 <template>
-    <section>
-        <div :style="gridSetup">
-            <cell v-for="value in (((parseInt(xMax))*parseInt(yMax)))" :coords="coordsCalculator(value)" :key="value" />
+    <section class="nes-container is-rounded with-title is-centered">
+        <p class="title">Game</p>
+        <div class="game-space">
+            <div  class="nes-container game-grid" :style="gridSetup">
+                <cell v-for="value in (((parseInt(xMax))*parseInt(yMax)))" :coords="coordsCalculator(value)" :key="value" />
+            </div>
+            <game-stats class="scores" />
         </div>
     </section>
 </template>
@@ -11,10 +15,15 @@ import cell from "./Cell.vue";
 import {mapState} from "vuex";
 import router from "../router";
 import {coordsForIndex} from "../utils";
+import GameStats from "./GameStats";
+
 
 export default {
     name: "grid",
-    components: {cell},
+    components: {
+        cell,
+        "game-stats": GameStats
+    },
     props: ["xMax", "yMax"],
     data() {
         return {
@@ -30,7 +39,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(["inGame", "lost"]),
+        ...mapState(["inGame", "lost", "snake"]),
         gridSetup() {
             let columns = "";
             let rows = "";
@@ -40,12 +49,12 @@ export default {
 
             return {
                 display: "grid",
-                padding: "1%",
+                padding: "1px",
                 "justify-content": "center",
                 "grid-template-columns": columns,
                 "grid-template-rows:": rows,
                 "background-color": "gray",
-                "grid-gap": "2px"
+                "grid-gap": "1px"
             }
         }
     },
@@ -56,8 +65,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-    section {
-        background-color: white;
+    .game-space {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto;
+        justify-content: center;
+        grid-gap: 3%;
+
+        .game-grid {
+            grid-row: 1;
+            grid-column: 1;
+        }
+
+        .scores {
+            grid-row: 1;
+            grid-column: 2;
+        }
     }
 </style>
 

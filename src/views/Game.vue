@@ -1,7 +1,8 @@
 <template>
-    <section>
-        <game-stats />
-        <grid :xMax="xMax" :yMax="yMax" :key="gameTick"/>
+    <section id="game-screen">
+        <div class="player-screen">
+            <grid :xMax="xMax" :yMax="yMax" :key="gameTick"/>
+        </div>
     </section>
 </template>
 
@@ -14,9 +15,7 @@ import {mapActions} from "vuex";
 export default {
     name: "game",
     components: {
-        grid,
-        "game-stats": GameStats
-
+        grid
     },
     computed: {
         ...mapState(["xMax", "yMax", "gameTick"])
@@ -31,5 +30,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    #game-screen {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100vh;
+
+        .player-screen {
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+    }
 
 </style>
