@@ -1,6 +1,28 @@
 <template>
     <section>
-        <div :style="displayStyle" v-html="displayHTML" :key="cellKey"></div>
+
+        <mouse v-if="this.cellInfo.food" :type="this.cellInfo.food" />
+
+        <EHead1 v-if="!this.to && this.from == 'E' && this.snake.style.type == 1" />
+        <NHead1 v-if="!this.to && this.from == 'N' && this.snake.style.type == 1" />
+        <WHead1 v-if="!this.to && this.from == 'W' && this.snake.style.type == 1" />
+        <SHead1 v-if="!this.to && this.from == 'S' && this.snake.style.type == 1" />
+
+        <EWSegment1 v-if="this.to == 'E' && this.from == 'W' && this.snake.style.type == 1" />
+        <WESegment1 v-if="this.to == 'W' && this.from == 'E' && this.snake.style.type == 1" />
+        <NSSegment1 v-if="this.to == 'S' && this.from == 'N' && this.snake.style.type == 1" />
+        <SNSegment1 v-if="this.to == 'N' && this.from == 'S' && this.snake.style.type == 1" />
+
+        <WNTurn1 v-if="(this.to == 'W' && this.from == 'N') || (this.to == 'N' && this.from == 'W') && this.snake.style.type == 1" />
+        <ENTurn1 v-if="(this.to == 'E' && this.from == 'N') || (this.to == 'N' && this.from == 'E') && this.snake.style.type == 1" />
+        <WSTurn1 v-if="(this.to == 'W' && this.from == 'S') || (this.to == 'S' && this.from == 'W') && this.snake.style.type == 1" />
+        <ESTurn1 v-if="(this.to == 'E' && this.from == 'S') || (this.to == 'S' && this.from == 'E') && this.snake.style.type == 1" />
+
+        <ETail1 v-if="this.to == 'E' && !this.from && this.snake.style.type == 1" />
+        <NTail1 v-if="this.to == 'N' && !this.from && this.snake.style.type == 1" />
+        <WTail1 v-if="this.to == 'W' && !this.from && this.snake.style.type == 1" />
+        <STail1 v-if="this.to == 'S' && !this.from && this.snake.style.type == 1" />
+
     </section>
 </template>
 
@@ -8,8 +30,45 @@
 import {mapGetters} from "vuex";
 import {mapState} from "vuex";
 
+import mouse from "./sprites/mouse"
+import EHead1 from "./sprites/1-striped/EHead";
+import WHead1 from "./sprites/1-striped/WHead";
+import NHead1 from "./sprites/1-striped/NHead";
+import SHead1 from "./sprites/1-striped/SHead";
+import EWSegment1 from "./sprites/1-striped/EWSegment";
+import WESegment1 from "./sprites/1-striped/WESegment";
+import NSSegment1 from "./sprites/1-striped/NSSegment";
+import SNSegment1 from "./sprites/1-striped/SNSegment";
+import WNTurn1 from "./sprites/1-striped/WNTurn";
+import ENTurn1 from "./sprites/1-striped/ENTurn";
+import WSTurn1 from "./sprites/1-striped/WSTurn";
+import ESTurn1 from "./sprites/1-striped/ESTurn";
+import ETail1 from "./sprites/1-striped/ETail";
+import NTail1 from "./sprites/1-striped/NTail";
+import WTail1 from "./sprites/1-striped/WTail";
+import STail1 from "./sprites/1-striped/STail";
+
 export default {
     name: "cell",
+    components: {
+        mouse,
+        EHead1,
+        WHead1,
+        NHead1,
+        SHead1,
+        EWSegment1,
+        WESegment1,
+        NSSegment1,
+        SNSegment1,
+        WNTurn1,
+        ENTurn1,
+        WSTurn1,
+        ESTurn1,
+        ETail1,
+        NTail1,
+        WTail1,
+        STail1
+        },
     props: ["coords"],
     computed: {
         ...mapState({
@@ -23,36 +82,46 @@ export default {
         cellInfo() {
             return this.grid[this.coords]
         },
-        getSnake() {
-            return this.snake;
+        snakeIndex() {
+            return this.snake.coords.indexOf(this.coords)
         },
-        displayStyle() {
-            if(this.cellInfo) {
-                let style = {
-                    height: "100%",
-                    width: "100%",
-                    "font-size": "8px",
-                    "text-align": "center",
-                    "background-color": "white"
-                }
+        from() {
+            if(this.snakeIndex <= 0 ) return null;
+            else {
+                const x = this.coords.split("-")[0];
+                const y = this.coords.split("-")[1];
 
-                if(this.cellInfo.occupied) style["background-color"] = "green"
-                else if(this.cellInfo.food) style["background-color"] = "yellow"
-                
-                return style
-            } else return {};
+                const lastX = this.snake.coords[this.snakeIndex - 1].split("-")[0];
+                const lastY = this.snake.coords[this.snakeIndex - 1].split("-")[1];
+
+                const diffX = lastX - x;
+                const diffY = lastY - y;
+
+                if(diffX > 0) return "W";
+                else if(diffX < 0) return "E";
+                else if(diffY > 0) return "N";
+                else if (diffY < 0) return "S";
+                else return null;
+            }
         },
-        displayHTML() {
-            if(this.cellInfo) {
-                if(this.cellInfo.occupied) {
-                    const snakeIndex = this.snake.coords.indexOf(this.coords);
-                    if(snakeIndex == 0) return "<span class='nes-text'>T</span>";
-                    else if(snakeIndex == this.snake.coords.length - 1) return "<span class='nes-text'>H</span>";
-                    else return "<span class='nes-text'>S</span>";
-                }
-                else if(this.cellInfo.food) return "<span class='nes-text'>" + this.cellInfo.food + "</span>";
-                else return this.coords;
-            } else return "";
+        to() {
+            if(this.snakeIndex == -1 || this.snakeIndex == this.snake.coords.length -1 ) return null;
+            else {
+                const x = this.coords.split("-")[0];
+                const y = this.coords.split("-")[1];
+
+                const nextX = this.snake.coords[this.snakeIndex + 1].split("-")[0];
+                const nextY = this.snake.coords[this.snakeIndex + 1].split("-")[1];
+
+                const diffX = nextX - x;
+                const diffY = nextY - y;
+
+                if(diffX > 0) return "W";
+                else if(diffX < 0) return "E";
+                else if(diffY > 0) return "N";
+                else if (diffY < 0) return "S";
+                else return null;
+            }
         }
     },
     
@@ -63,5 +132,6 @@ export default {
     section {
         height: 36px;
         width: 36;
+        background-color: white;
     }
 </style>
