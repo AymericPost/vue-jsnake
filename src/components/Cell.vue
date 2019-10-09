@@ -1,7 +1,8 @@
 <template>
     <section>
 
-        <mouse v-if="this.cellInfo.food" :type="this.cellInfo.food" />
+        <mouse v-if="['M', 'SM'].includes(this.cellInfo.food)" :type="this.cellInfo.food" />
+        <rabbit v-if="['R', 'SR'].includes(this.cellInfo.food)" :type="this.cellInfo.food" />
 
         <EHead1 v-if="!this.to && this.from == 'E' && this.snake.style.type == 1" />
         <NHead1 v-if="!this.to && this.from == 'N' && this.snake.style.type == 1" />
@@ -30,7 +31,8 @@
 import {mapGetters} from "vuex";
 import {mapState} from "vuex";
 
-import mouse from "./sprites/mouse"
+import mouse from "./sprites/mouse";
+import rabbit from "./sprites/rabbit"
 import EHead1 from "./sprites/1-striped/EHead";
 import WHead1 from "./sprites/1-striped/WHead";
 import NHead1 from "./sprites/1-striped/NHead";
@@ -52,6 +54,7 @@ export default {
     name: "cell",
     components: {
         mouse,
+        rabbit,
         EHead1,
         WHead1,
         NHead1,
