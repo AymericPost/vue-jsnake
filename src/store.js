@@ -12,7 +12,7 @@ export default new Vuex.Store({
     inMenu: true,
     paused: false,
     lost: false,
-    gameOverType: 0,
+    gameOverType: -1,
     clockId: "",
     keyboard: "QWERTY",
     keyMapping: {
@@ -145,7 +145,7 @@ export default new Vuex.Store({
       this.state.inGame = true;
       this.state.lost = false;
       this.state.gameTick = 0;
-      this.state.gameOverType = 0;
+      this.state.gameOverType = -1;
 
       for(let i = 0 ; i < (((this.state.xMax) * this.state.yMax)) ; i++) {
           this.state.grid[coordsForIndex(i, this.state.xMax, this.state.yMax)] = {occupied: false, food: null};
@@ -211,13 +211,14 @@ export default new Vuex.Store({
       });
     },
     generateFood() {
-      let dropPoint = this.state.snake.coords[0];
+      const availableCoords = Object.keys(this.state.grid).filter(key => {
+        return !this.state.grid[key].occupied
+      })
 
-      while(this.state.grid[dropPoint].occupied) {
-        dropPoint = (Math.floor(Math.random() * this.state.xMax) + 1) + "-" + (Math.floor(Math.random() * this.state.yMax) + 1 ) 
-      }
-
-      this.state.grid[dropPoint].food = "N";
+      if(availableCoords.length == 0) {
+          this.state.lost = true;
+          this.state.gameOverType = 0;
+      } else this.state.grid[availableCoords[Math.round(Math.random() * (availableCoords.length - 1))]].food = "N";
     },
     forfeit() {
       this.state.inGame = false;

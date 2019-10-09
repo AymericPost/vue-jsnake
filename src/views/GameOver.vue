@@ -24,6 +24,9 @@ export default {
         ...mapState(["gameOverType", "score", "snake", "gameTick", "msPerGameTick"]),
         gameOverMessage() {
             switch (this.gameOverType) {
+                case 0:
+                    return "All the mice are belong to us."
+                    break;
                 case 1:
                     return "Why do you hit yourself ?";
                     break;
@@ -52,7 +55,7 @@ export default {
         }
     },
     beforeMount() {
-        if(this.gameOverType == 0) router.push("/");
+        if(this.gameOverType == -1) router.push("/");
     }
 }
 </script>
