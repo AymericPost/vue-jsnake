@@ -28,6 +28,12 @@ export default new Vuex.Store({
       80: "togglePause",
       19: "togglePause"
     },
+    foodValues: {
+      M: 10,
+      SM: 30,
+      R: 20,
+      SR: 50
+    },
     xMax: 12,
     yMax: 12,
     gameTick: 0,
@@ -44,7 +50,13 @@ export default new Vuex.Store({
       },
       coords: [],
       direction: "",
-      ateFood: false
+      ateFood: false,
+      foodCount: {
+        M: 0,
+        SM: 0,
+        R: 0,
+        SR: 0
+      }
     }
   },
   getters: {
@@ -146,6 +158,12 @@ export default new Vuex.Store({
       this.state.lost = false;
       this.state.gameTick = 0;
       this.state.gameOverType = -1;
+      this.state.snake.foodCount = {
+        M: 0,
+        SM: 0,
+        R: 0,
+        SR: 0
+      }
 
       for(let i = 0 ; i < (((this.state.xMax) * this.state.yMax)) ; i++) {
           this.state.grid[coordsForIndex(i, this.state.xMax, this.state.yMax)] = {occupied: false, food: null};
@@ -175,9 +193,11 @@ export default new Vuex.Store({
           const moved = [next[0] - previous[0], next[1] - previous[1]];
 
           if(this.state.grid[next.join("-")] && this.state.grid[next.join("-")].food) {
-            this.state.snake.ateFood = true;
-            this.state.score += 10;
+            this.state.snake.ateFood = this.state.grid[next.join("-")].food;
+            this.state.score += this.state.foodValues[this.state.grid[next.join("-")].food];
+            this.state.snake.foodCount[this.state.grid[next.join("-")].food]++;
             this.state.grid[next.join("-")].food = null;
+            delete this.state.grid[next.join("-")].expiration
           }
 
           this.state.snake.coords.push(this.state.snake.direction);
@@ -210,15 +230,51 @@ export default new Vuex.Store({
         }
       });
     },
+    expirationCheck() {
+      const perishables = Object.keys(this.state.grid).filter(key => {
+        return this.state.grid[key].expiration;
+      });
+
+      perishables.forEach(coords => {
+        if(this.state.grid[coords].expiration < this.state.gameTick) {
+          this.state.grid[coords].food = null;
+          delete this.state.grid[coords].expiration;
+        }
+      })
+    },
     generateFood() {
       const availableCoords = Object.keys(this.state.grid).filter(key => {
-        return !this.state.grid[key].occupied
-      })
+        return !this.state.grid[key].occupied;
+      });
+
+      const normalRoll = Math.random() * 100;
+      const superRoll = Math.random() * 100;
 
       if(availableCoords.length == 0) {
           this.state.lost = true;
           this.state.gameOverType = 0;
-      } else this.state.grid[availableCoords[Math.round(Math.random() * (availableCoords.length - 1))]].food = "N";
+      } else {
+        if(normalRoll < 40) {
+          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
+          this.state.grid[availableCoords[posRoll]].food = "R";
+          availableCoords.splice(posRoll);
+        } else  {
+          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
+          this.state.grid[availableCoords[posRoll]].food = "M";
+          availableCoords.splice(posRoll);
+        }
+
+        if(availableCoords.length > 0 && superRoll < 30 && superRoll <= 10) {
+          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
+          this.state.grid[availableCoords[posRoll]].food = "SR";
+          this.state.grid[availableCoords[posRoll]].expiration = this.state.gameTick + Math.round(this.state.xMax + (this.state.yMax / 2));
+        } else if(availableCoords.length > 0 && superRoll < 30 && superRoll > 10) {
+          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
+          this.state.grid[availableCoords[posRoll]].food = "SM";
+          this.state.grid[availableCoords[posRoll]].expiration = this.state.gameTick + Math.round(this.state.xMax + (this.state.yMax / 2));
+        }
+
+      } 
     },
     forfeit() {
       this.state.inGame = false;
@@ -272,16 +328,14 @@ export default new Vuex.Store({
             this.state.paused = false;
             this.state.lost = false;
             this.state.grid = {};
-
-            setTimeout(() => {
-              router.push("/game-over")
-            }, 500)
+            router.push("/game-over")
 
             clearInterval(intervalId);
           } else if(this.state.inGame && !this.state.paused && !this.state.lost) {
             this.commit("nextGameTick");
             this.commit("occupiedCheck");
-            if(this.state.snake.ateFood) this.commit("generateFood");
+            this.commit("expirationCheck");
+            if(["M", "R"].includes(this.state.snake.ateFood)) this.commit("generateFood");
           };
         }, this.state.msPerGameTick);
         this.commit("setClockId", intervalId);

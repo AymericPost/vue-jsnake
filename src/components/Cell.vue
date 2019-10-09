@@ -24,6 +24,7 @@
         <WTail1 v-if="this.to == 'W' && !this.from && this.snake.style.type == 1" />
         <STail1 v-if="this.to == 'S' && !this.from && this.snake.style.type == 1" />
 
+        <progress :value="this.expirationProgress" :max="this.xMax + Math.round(this.yMax / 2)" v-if="this.cellInfo.expiration"></progress>
     </section>
 </template>
 
@@ -75,15 +76,22 @@ export default {
     props: ["coords"],
     computed: {
         ...mapState({
+            xMax: state => state.xMax,
+            yMax: state => state.yMax,
             grid: state => state.grid,
             snake: state => state.snake,
             gameTick: state => state.gameTick
         }),
+        expirationProgress() {
+            if(!this.cellInfo) return null;
+            else return this.cellInfo.expiration - this.gameTick;
+        },
         cellKey() {
             return this.gameTick + " " + this.coords;
         },
         cellInfo() {
-            return this.grid[this.coords]
+            if(this.grid[this.coords]) return this.grid[this.coords];
+            else return {};
         },
         snakeIndex() {
             return this.snake.coords.indexOf(this.coords)
@@ -136,5 +144,31 @@ export default {
         height: 36px;
         width: 36;
         background-color: white;
+        position: relative;
+
+        progress {
+            position: absolute;
+            bottom: 12%;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            color: red;
+        }
+
+        progress::-webkit-progress-value {
+            background: red;
+        }
+
+        progress::-moz-progress-bar {
+         background: red;
+        }
+
+        progress::-webkit-progress-value {
+          background: red;
+        }
+
+        progress::-webkit-progress-bar {
+         background: red;
+        }
     }
 </style>
