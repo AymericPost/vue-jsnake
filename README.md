@@ -52,7 +52,7 @@ Chances for normal food :
 - Mouse : 60%
 - Rabbit : 40%
 
-There is a change perishable food will appear for each normal eaten :
+There is a chance perishable food will appear for each normal eaten :
 - Golden mouse : 20%
 - Golden rabbit : 10%
 - None : 70%
