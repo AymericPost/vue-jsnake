@@ -1,27 +1,99 @@
 <template>
   <section>
-      <h2 class="nes-text is-error">Game Over !</h2>
-      <h4 class="nes-text is-error">{{gameOverMessage}}</h4>
-      <p>Score : <span class="nes-text is-primary">{{score}}</span> pts.</p>
-      <p>Survived : <span v-html="survivedCalc"></span></p>
-      <p>Length : <span class="nes-text is-primary">{{snake.coords.length}}</span> m.</p>
-      <div><button @click="toMenu()" class="nes-btn">New game</button></div>
+    <h2 class="nes-text is-error">Game Over !</h2>
+    <h4 class="nes-text is-error">{{gameOverMessage}}</h4>
+
+    <div class="diet-item" v-if="this.snake.foodCount.M > 0">
+        <div class="diet-representation">
+            <div><mouse type="M" /></div>
+        </div>
+        <div class="diet-text">
+            <div>
+                <p>
+                    Mice :
+                    <span class="nes-text is-primary">{{this.foodValues.M}}</span> pts.
+                    x{{this.snake.foodCount.M}}
+                    = <span class="nes-text is-primary">{{this.foodValues.M * this.snake.foodCount.M}}</span> pts.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="diet-item" v-if="this.snake.foodCount.SM > 0">
+        <div class="diet-representation">
+            <div><mouse type="SM" /></div>
+        </div>
+        <div class="diet-text">
+            <div>
+                <p>
+                    Golden mice :
+                    <span class="nes-text is-primary">{{this.foodValues.SM}}</span> pts.
+                    x{{this.snake.foodCount.SM}}
+                    = <span class="nes-text is-primary">{{this.foodValues.SM * this.snake.foodCount.SM}}</span> pts.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="diet-item" v-if="this.snake.foodCount.R > 0">
+        <div class="diet-representation">
+            <div><rabbit type="R" /></div>
+        </div>
+        <div class="diet-text">
+            <div>
+            <p>
+                Rabbits :
+                <span class="nes-text is-primary">{{this.foodValues.R}}</span> pts.
+                x{{this.snake.foodCount.R}}
+                = <span class="nes-text is-primary">{{this.foodValues.R * this.snake.foodCount.R}}</span> pts.
+            </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="diet-item" v-if="this.snake.foodCount.SR > 0">
+        <div class="diet-representation">
+            <div><rabbit type="SR" /></div>
+        </div>
+        <div class="diet-text">
+            <div>
+            <p>
+                Golden rabbits :
+                <span class="nes-text is-primary">{{this.foodValues.SR}}</span> pts.
+                x{{this.snake.foodCount.SR}}
+                = <span class="nes-text is-primary">{{this.foodValues.SR * this.snake.foodCount.SR}}</span> pts.
+            </p>
+            </div>
+        </div>
+    </div>
+
+    <p class="diet-total">Total : <span class="nes-text is-primary">{{this.score}}</span> pts.</p>
+    <p>Survived : <span v-html="survivedCalc"></span></p>
+    <p>Length : <span class="nes-text is-primary">{{snake.coords.length}}</span> m.</p>
+
+    <div><button @click="toMenu()" class="nes-btn">New game</button></div>
   </section>
 </template>
 
 <script>
 import {mapState} from "vuex";
 import router from "../router";
+import mouse from "../components/sprites/mouse";
+import rabbit from "../components/sprites/rabbit";
 
 export default {
     name: "GameOver",
+    components: {
+        mouse,
+        rabbit
+    },
     methods: {
         toMenu() {
             return router.push("/");
         }
     },
     computed: {
-        ...mapState(["gameOverType", "score", "snake", "gameTick", "msPerGameTick"]),
+        ...mapState(["gameOverType", "foodValues", "score", "snake", "gameTick", "msPerGameTick"]),
         gameOverMessage() {
             switch (this.gameOverType) {
                 case 0:
@@ -86,6 +158,65 @@ export default {
                 min-width: 300px;
             }
         }
-        
+            
+        .diet-item {
+            display: grid;
+            grid-row: span 1;
+            grid-template-columns: auto auto;
+            grid-template-rows: auto;
+            position: relative;
+            margin: 0;
+            margin-top: -1%;
+            
+
+            .diet-representation {
+                display: flex;
+                flex-direction: row;
+                grid-column: 1;
+                grid-row: 1;
+                justify-content: center;
+                margin: 0;
+                
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    margin: 0;
+
+                    section {
+                    height: 36px;
+                    width: 36px;
+                    }
+                }
+                
+            }
+
+            .diet-text {
+                grid-column: 2;
+                grid-row: 1;
+                margin: 0;
+                margin-left: 5%;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    p {
+                        white-space: nowrap;
+                    }
+                    
+                }
+            }
+
+        }
+        .diet-total {
+            margin-top: 1%;
+        }
     }
 </style>
