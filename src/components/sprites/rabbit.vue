@@ -22,79 +22,11 @@
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
@@ -106,13 +38,13 @@
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
@@ -125,25 +57,93 @@
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
 
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('eyes')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('eyes')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
@@ -154,69 +154,52 @@
         <div class="pixel" :style="backgroundColor()"></div>
 
         <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+
+        <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
-        <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
 
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
+        <div class="pixel" :style="backgroundColor('body')"></div>
         <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor('outline')"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
-        <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
@@ -225,14 +208,31 @@
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
+
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor()"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
+        <div class="pixel" :style="backgroundColor('outline')"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
         <div class="pixel" :style="backgroundColor()"></div>
@@ -276,7 +276,7 @@
 
 <script>
 export default {
-    name: "mouse",
+    name: "rabbit",
     props: ["type"],
     methods: {
         backgroundColor(element) {
@@ -285,10 +285,10 @@ export default {
                     return {"background-color": "black"};
                     break;
                 case "eyes":
-                    return {"background-color": this.type == "SM" ? "red" : "black"};
+                    return {"background-color": this.type == "SR" ? "red" : "darkcyan"};
                     break;
                 case "body":
-                    return {"background-color": this.type == "SM" ? "gold" : "gray"};
+                    return {"background-color": this.type == "SR" ? "gold" : "whitesmoke"};
                     break;
                 default:
                     return {"background-color": "white"}
