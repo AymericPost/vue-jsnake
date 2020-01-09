@@ -1,7 +1,7 @@
 <template>
   <section>
-    <h2 class="nes-text is-error">Game Over !</h2>
-    <h4 class="nes-text is-error">{{gameOverMessage}}</h4>
+    <h2 :class="this.gameOverStyleClass(1)">Game Over !</h2>
+    <h4 :class="this.gameOverStyleClass(2)">{{gameOverMessage}}</h4>
 
     <div class="diet-item" v-if="this.snake.foodCount.M > 0">
         <div class="diet-representation">
@@ -87,9 +87,36 @@ export default {
         mouse,
         rabbit
     },
+    data() {
+        return {
+            gameWon: [
+                "You win!",
+                "All the mice are belong to us.",
+                "Thank you snake, but the mouse is in another game.",
+                "GG WP NO-RE!"
+            ],
+            snakeHit: [
+                "Why do you hit yourself ?",
+                "That must have hurt.",
+                "You tried to be Ouroboros and failed.",
+                "What's wrong ? Snake ?! SNAAAAKE !!"
+            ],
+            wallHit: [
+                "You cannot eat the cosmic event horizon.",
+                "There is no escape.",
+                "You tested the curvature of space and found out is was flat.",
+                "What's wrong ? Snake ?! SNAAAAKE !!"
+            ]
+        }
+    },
     methods: {
         toMenu() {
             return router.push("/");
+        },
+        gameOverStyleClass(slot) {
+            if(this.gameOverType == 0 && slot == 1) return "nes-text is-primary";
+            else if(this.gameOverType == 0 && slot == 2) return "nes-text is-success";
+            else return "nes-text is-error"
         }
     },
     computed: {
@@ -97,13 +124,13 @@ export default {
         gameOverMessage() {
             switch (this.gameOverType) {
                 case 0:
-                    return "All the mice are belong to us."
+                    return this.gameWon[Math.floor(Math.random() * this.gameWon.length)] ;
                     break;
                 case 1:
-                    return "Why do you hit yourself ?";
+                    return this.snakeHit[Math.floor(Math.random() * this.snakeHit.length)];
                     break;
                 case 2:
-                    return "You cannot eat the cosmic event horizon.";
+                    return this.wallHit[Math.floor(Math.random() * this.wallHit.length)];
                     break;
                 default:
                     return "There must be some kind of error...";
