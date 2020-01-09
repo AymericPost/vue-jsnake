@@ -1,7 +1,7 @@
 <template>
     <section id="game-screen">
         <div class="player-screen">
-            <grid :xMax="xMax" :yMax="yMax" :key="gameTick"/>
+            <grid :xMax="xMax" :yMax="yMax" />
         </div>
     </section>
 </template>
