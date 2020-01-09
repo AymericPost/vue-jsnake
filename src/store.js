@@ -178,8 +178,6 @@ export default new Vuex.Store({
 
       try {
         if(this.state.grid[this.state.snake.direction].occupied) {
-          console.error("snakePointerException: \"why do you hit yourself?\"")
-          console.log("You lost!")
           this.state.lost = true;
           this.state.gameOverType = 1;
         }
@@ -208,8 +206,6 @@ export default new Vuex.Store({
 
         this.state.gameTick++;
       } catch(err) {
-          console.error("snakeOutOfBoundException: \"you cannot eat the cosmic event horizon\"");
-          console.log("You lost!")
           this.state.lost = true;
           this.state.gameOverType = 2;
       }
