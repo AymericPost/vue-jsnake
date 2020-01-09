@@ -176,40 +176,44 @@ export default new Vuex.Store({
     nextGameTick() {
       this.state.snake.ateFood = false;
 
-      try {
-        if(this.state.grid[this.state.snake.direction].occupied) {
-          this.state.lost = true;
-          this.state.gameOverType = 1;
-        }
-        else {
-          const previous = this.state.snake.coords[this.state.snake.coords.length - 1].split("-").map(elem => {
-            return parseInt(elem);
-          });
-          const next = this.state.snake.direction.split("-").map(elem => {
-            return parseInt(elem);
-          });
-          const moved = [next[0] - previous[0], next[1] - previous[1]];
-
-          if(this.state.grid[next.join("-")] && this.state.grid[next.join("-")].food) {
-            this.state.snake.ateFood = this.state.grid[next.join("-")].food;
-            this.state.score += this.state.foodValues[this.state.grid[next.join("-")].food];
-            this.state.snake.foodCount[this.state.grid[next.join("-")].food]++;
-            this.state.grid[next.join("-")].food = null;
-            delete this.state.grid[next.join("-")].expiration
+      if(this.state.snake.coords.length == Object.keys(this.state.grid).length) {
+        this.state.lost = true;
+        this.state.gameOverType = 0;
+      } else {
+        try {
+          if(this.state.grid[this.state.snake.direction].occupied) {
+            this.state.lost = true;
+            this.state.gameOverType = 1;
           }
-
-          this.state.snake.coords.push(this.state.snake.direction);
-          this.state.snake.direction = [next[0] + moved[0], next[1] + moved[1]].join("-");
-          
-          if(!this.state.snake.ateFood) this.state.snake.coords.shift();
+          else {
+            const previous = this.state.snake.coords[this.state.snake.coords.length - 1].split("-").map(elem => {
+              return parseInt(elem);
+            });
+            const next = this.state.snake.direction.split("-").map(elem => {
+              return parseInt(elem);
+            });
+            const moved = [next[0] - previous[0], next[1] - previous[1]];
+  
+            if(this.state.grid[next.join("-")] && this.state.grid[next.join("-")].food) {
+              this.state.snake.ateFood = this.state.grid[next.join("-")].food;
+              this.state.score += this.state.foodValues[this.state.grid[next.join("-")].food];
+              this.state.snake.foodCount[this.state.grid[next.join("-")].food]++;
+              this.state.grid[next.join("-")].food = null;
+              delete this.state.grid[next.join("-")].expiration
+            }
+  
+            this.state.snake.coords.push(this.state.snake.direction);
+            this.state.snake.direction = [next[0] + moved[0], next[1] + moved[1]].join("-");
+            
+            if(!this.state.snake.ateFood) this.state.snake.coords.shift();
+          }
+  
+          this.state.gameTick++;
+        } catch(err) {
+            this.state.lost = true;
+            this.state.gameOverType = 2;
         }
-
-        this.state.gameTick++;
-      } catch(err) {
-          this.state.lost = true;
-          this.state.gameOverType = 2;
       }
-      
     },
     occupiedCheck() {
       const cellList = Object.keys(this.state.grid);
@@ -240,37 +244,35 @@ export default new Vuex.Store({
     },
     generateFood() {
       const availableCoords = Object.keys(this.state.grid).filter(key => {
-        return !this.state.grid[key].occupied;
+        return !this.state.grid[key].occupied && !this.state.grid[key].food;
       });
 
       const normalRoll = Math.random() * 100;
       const superRoll = Math.random() * 100;
 
-      if(availableCoords.length == 0) {
-          this.state.lost = true;
-          this.state.gameOverType = 0;
-      } else {
-        if(normalRoll < 40) {
-          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
-          this.state.grid[availableCoords[posRoll]].food = "R";
-          availableCoords.splice(posRoll);
-        } else  {
-          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
-          this.state.grid[availableCoords[posRoll]].food = "M";
-          availableCoords.splice(posRoll);
-        }
+      if(normalRoll < 40) {
+        const posRoll = Math.floor(Math.random() * availableCoords.length);
+        this.state.grid[availableCoords[posRoll]].food = "R";
+        delete this.state.grid[availableCoords[posRoll]].expiration;
+        availableCoords.splice(posRoll);
+      } else  {
+        const posRoll = Math.floor(Math.random() * availableCoords.length);
+        this.state.grid[availableCoords[posRoll]].food = "M";
+        delete this.state.grid[availableCoords[posRoll]].expiration;
+        availableCoords.splice(posRoll);
+      }
 
-        if(availableCoords.length > 0 && superRoll < 30 && superRoll <= 10) {
-          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
-          this.state.grid[availableCoords[posRoll]].food = "SR";
-          this.state.grid[availableCoords[posRoll]].expiration = this.state.gameTick + Math.round(this.state.xMax + (this.state.yMax / 2));
-        } else if(availableCoords.length > 0 && superRoll < 30 && superRoll > 10) {
-          const posRoll = Math.round(Math.random() * (availableCoords.length - 1));
-          this.state.grid[availableCoords[posRoll]].food = "SM";
-          this.state.grid[availableCoords[posRoll]].expiration = this.state.gameTick + Math.round(this.state.xMax + (this.state.yMax / 2));
-        }
+      if(availableCoords.length > 0 && superRoll < 30 && superRoll <= 10) {
+        const posRoll = Math.floor(Math.random() * availableCoords.length);
+        this.state.grid[availableCoords[posRoll]].food = "SR";
+        this.state.grid[availableCoords[posRoll]].expiration = this.state.gameTick + Math.round(this.state.xMax + (this.state.yMax / 2));
+      } else if(availableCoords.length > 0 && superRoll < 30 && superRoll > 10) {
+        const posRoll = Math.floor(Math.random() * availableCoords.length);
+        this.state.grid[availableCoords[posRoll]].food = "SM";
+        this.state.grid[availableCoords[posRoll]].expiration = this.state.gameTick + Math.round(this.state.xMax + (this.state.yMax / 2));
+      }
 
-      } 
+      
     },
     forfeit() {
       this.state.inGame = false;
