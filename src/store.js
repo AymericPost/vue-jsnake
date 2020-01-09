@@ -71,8 +71,7 @@ export default new Vuex.Store({
       });
       const newDirection = [head[0], head[1] + 1].join("-")
 
-      if(!this.state.grid[newDirection]) this.state.snake.direction = newDirection;
-      else if(!this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
+      if(this.state.grid[newDirection] && newDirection == this.state.snake.coords[0] || !this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
     },
     directionRight() {
       const head = this.state.snake.coords[this.state.snake.coords.length - 1].split("-").map(elem => {
@@ -80,8 +79,7 @@ export default new Vuex.Store({
       });
       const newDirection = [head[0] + 1, head[1]].join("-")
 
-      if(!this.state.grid[newDirection]) this.state.snake.direction = newDirection;
-      else if(!this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
+      if(this.state.grid[newDirection] && newDirection == this.state.snake.coords[0] || !this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
     },
     directionDown() {
       const head = this.state.snake.coords[this.state.snake.coords.length - 1].split("-").map(elem => {
@@ -89,8 +87,7 @@ export default new Vuex.Store({
       });
       const newDirection = [head[0], head[1] - 1].join("-")
 
-      if(!this.state.grid[newDirection]) this.state.snake.direction = newDirection;
-      else if(!this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
+      if(this.state.grid[newDirection] && newDirection == this.state.snake.coords[0] || !this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
     },
     directionLeft() {
       const head = this.state.snake.coords[this.state.snake.coords.length - 1].split("-").map(elem => {
@@ -98,8 +95,7 @@ export default new Vuex.Store({
       });
       const newDirection = [head[0] - 1, head[1]].join("-")
 
-      if(!this.state.grid[newDirection]) this.state.snake.direction = newDirection;
-      else if(!this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
+      if(this.state.grid[newDirection] && newDirection == this.state.snake.coords[0] || !this.state.grid[newDirection].occupied) this.state.snake.direction = newDirection;
     },
     togglePause() {
       console.log(this.state.paused ? "RESUME" : "PAUSE");
@@ -142,15 +138,13 @@ export default new Vuex.Store({
       this.state.yMax = arr[1];
     },
     setMsPerGameTick(state, ms) {
-      if(typeof ms == "number")
-      this.state.msPerGameTick = ms;
+      if(typeof ms == "number") this.state.msPerGameTick = ms;
     },
     setClockId(state, id) {
       this.state.clockId = id;
     },
     setInMenu(state, bool) {
-      if(typeof bool == "boolean")
-        this.state.inMenu = bool;
+      if(typeof bool == "boolean") this.state.inMenu = bool;
     },
     gameInit() {
       this.state.score = 0;
@@ -181,7 +175,7 @@ export default new Vuex.Store({
         this.state.gameOverType = 0;
       } else {
         try {
-          if(this.state.grid[this.state.snake.direction].occupied) {
+          if(this.state.grid[this.state.snake.direction].occupied && this.state.snake.direction != this.state.snake.coords[0]) {
             this.state.lost = true;
             this.state.gameOverType = 1;
           }
