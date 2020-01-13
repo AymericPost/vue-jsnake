@@ -71,12 +71,15 @@
     <p>Survived : <span v-html="survivedCalc"></span></p>
     <p>Length : <span class="nes-text is-primary">{{snake.coords.length}}</span> m.</p>
 
-    <div><button @click="toMenu()" class="nes-btn">New game</button></div>
+    <div>
+        <button @click="toMenu(false)" class="nes-btn">New game</button>
+        <button v-if="this.gameOverType == 0" @click="toMenu(true)" class="nes-btn is-success">New game<sup>+</sup></button>
+    </div>
   </section>
 </template>
 
 <script>
-import {mapState} from "vuex";
+import {mapState, mapActions} from "vuex";
 import router from "../router";
 import mouse from "../components/sprites/mouse";
 import rabbit from "../components/sprites/rabbit";
@@ -110,13 +113,18 @@ export default {
         }
     },
     methods: {
-        toMenu() {
-            return router.push("/");
+        ...mapActions(["setNewGamePlus", "startGame"]),
+        toMenu(newGamePlus) {
+            if(newGamePlus) {
+                this.setNewGamePlus();
+                this.startGame();
+            } 
+            else  router.push("/");
         },
         gameOverStyleClass(slot) {
             if(this.gameOverType == 0 && slot == 1) return "nes-text is-primary";
             else if(this.gameOverType == 0 && slot == 2) return "nes-text is-success";
-            else return "nes-text is-error"
+            else return "nes-text is-error";
         }
     },
     computed: {
@@ -184,6 +192,10 @@ export default {
             button {
                 min-width: 300px;
             }
+        }
+
+        button {
+        margin-left: 3%;
         }
             
         .diet-item {

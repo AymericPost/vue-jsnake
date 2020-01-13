@@ -10,6 +10,7 @@ export default new Vuex.Store({
   state: {
     inGame: false,
     inMenu: true,
+    isNewGamePlus: false,
     paused: false,
     lost: false,
     gameOverType: -1,
@@ -146,13 +147,17 @@ export default new Vuex.Store({
     setInMenu(state, bool) {
       if(typeof bool == "boolean") this.state.inMenu = bool;
     },
+    setNewGamePlus(state, bool) {
+      if(typeof bool == "boolean") this.state.isNewGamePlus = bool;
+    },
     gameInit() {
-      this.state.score = 0;
       this.state.inGame = true;
       this.state.lost = false;
-      this.state.gameTick = 0;
       this.state.gameOverType = -1;
-      this.state.snake.foodCount = {
+      if(this.state.isNewGamePlus) this.state.msPerGameTick -= 25;
+      if(!this.state.isNewGamePlus) this.state.gameTick = 0;
+      if(!this.state.isNewGamePlus) this.state.score = 0;
+      if(!this.state.isNewGamePlus) this.state.snake.foodCount = {
         M: 0,
         SM: 0,
         R: 0,
@@ -166,6 +171,8 @@ export default new Vuex.Store({
       const midPoint = [Math.floor(this.state.xMax / 2), Math.floor(this.state.yMax / 2)]
       this.state.snake.coords = [(midPoint[0] - 1) + "-" + midPoint[1], midPoint[0] + "-" + midPoint[1], (midPoint[0] + 1) + "-" + midPoint[1]]
       this.state.snake.direction = (midPoint[0] + 2) + "-" + midPoint[1];
+
+      this.state.isNewGamePlus = false;
     },
     nextGameTick() {
       this.state.snake.ateFood = false;
@@ -308,6 +315,9 @@ export default new Vuex.Store({
     },
     setInMenu(state, bool) {
       this.commit("setInMenu", bool)
+    },
+    setNewGamePlus() {
+      this.commit("setNewGamePlus", true);
     },
     startGame(state) {
       if(!this.state.inGame){
