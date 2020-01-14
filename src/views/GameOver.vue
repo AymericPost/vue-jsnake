@@ -128,7 +128,7 @@ export default {
         }
     },
     computed: {
-        ...mapState(["gameOverType", "foodValues", "score", "snake", "gameTick", "msPerGameTick"]),
+        ...mapState(["gameOverType", "foodValues", "score", "snake", "gameTick", "msPerGameTick", "previousTime"]),
         gameOverMessage() {
             switch (this.gameOverType) {
                 case 0:
@@ -146,7 +146,12 @@ export default {
             }
         },
         survivedCalc() {
-            const elapsedMs = this.gameTick * this.msPerGameTick;
+            let elapsedMs = this.gameTick * this.msPerGameTick;
+
+            this.previousTime.forEach(obj => {
+                elapsedMs += obj.gameTick * obj.msPerGameTick;
+            });
+
             const elapsedSec = elapsedMs / 1000;
 
             const seconds = Math.floor((elapsedSec) % 60);

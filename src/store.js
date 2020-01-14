@@ -39,6 +39,7 @@ export default new Vuex.Store({
     yMax: 12,
     gameTick: 0,
     msPerGameTick: 1000,
+    previousTime: [],
     grid: {},
     score: 0,
     snake: {
@@ -148,14 +149,22 @@ export default new Vuex.Store({
       if(typeof bool == "boolean") this.state.inMenu = bool;
     },
     setNewGamePlus(state, bool) {
-      if(typeof bool == "boolean") this.state.isNewGamePlus = bool;
+      if(typeof bool == "boolean") {
+        this.state.isNewGamePlus = bool;
+
+        this.state.previousTime.push({
+          msPerGameTick: this.state.msPerGameTick,
+          gameTick: this.state.gameTick
+        });
+      }
     },
     gameInit() {
       this.state.inGame = true;
       this.state.lost = false;
       this.state.gameOverType = -1;
+      this.state.gameTick = 0;
       if(this.state.isNewGamePlus) this.state.msPerGameTick -= 25;
-      if(!this.state.isNewGamePlus) this.state.gameTick = 0;
+      if(!this.state.isNewGamePlus) this.state.previousTime = [];
       if(!this.state.isNewGamePlus) this.state.score = 0;
       if(!this.state.isNewGamePlus) this.state.snake.foodCount = {
         M: 0,
